@@ -1,13 +1,6 @@
 /* This is the data we will be using, study it but don't change anything, yet. */
 
-let menuItems = [
-  'Students',
-  'Faculty',
-  "What's New",
-  'Tech Trends',
-  'Music',
-  'Log Out'
-];
+let menuItems = [ 'Students', 'Faculty', "What's New", 'Tech Trends', 'Music', 'Log Out' ];
 
 /* 
 
@@ -33,3 +26,24 @@ let menuItems = [
   Step 6: add the menu component to the DOM.
   
 */
+function menuCreator(arr) {
+	const navigation = document.createElement('div');
+	const navItems = document.createElement('ul');
+
+	navigation.classList.add('menu');
+
+	arr.forEach((link) => {
+		let menuItem = document.createElement('li');
+		menuItem.textContent = link;
+		navItems.appendChild(menuItem);
+	});
+
+	let menuButton = document.querySelector('.menu-button');
+	menuButton.addEventListener('click', () => {
+		navigation.classList.toggle('menu--open');
+	});
+
+	navigation.appendChild(navItems);
+	return navigation;
+}
+document.querySelector('.header').appendChild(menuCreator(menuItems));
