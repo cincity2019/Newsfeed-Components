@@ -112,20 +112,37 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
-function newsfeedCreator(articleTitle, articleDate, paragraphOne, paragraphTwo, paragraphThree) {
-	const article = document.createElement('div');
-	const title = document.createElement('h2');
-	const date = document.createElement('p');
-	const firstParagraph = document.createElement('p');
-	const secondParagraph = document.createElement('p');
-	const thirdParagraph = document.createElement('p');
-	const buttonHolder = document.createElement('span');
-	const buttonOpen = document.createElement('button');
-	const buttonClose = document.createElement('button');
+const articles = document.querySelector('.articles');
 
+function createArticle(title, date, firstParagraph, secondParagraph, thirdParagraph) {
+	const article = document.createElement('div');
+	const articleTitle = document.createElement('h2');
+	const articleDate = document.createElement('p');
+	const paraOne = document.createElement('p');
+	const paraTwo = document.createElement('p');
+	const paraThree = document.createElement('p');
+	const button = document.createElement('span');
+
+	article.appendChild(articleTitle);
+	article.appendChild(articleDate);
+	article.appendChild(paraOne);
+	article.appendChild(paraTwo);
+	article.appendChild(paraThree);
+	article.appendChild(button);
 	article.classList.add('article');
-	date.classList.add('date');
-	buttonHolder.classList.add('expandButton');
-	buttonOpen.classList.add('close');
-	buttonClose.classList.add('close');
+	articleDate.classList.add('date');
+	button.classList.add('expandButton');
+	articleTitle.textContent = title;
+	articleDate.textContent = date;
+	paraOne.textContent = firstParagraph;
+	paraTwo.textContent = secondParagraph;
+	paraThree.textContent = thirdParagraph;
+	button.textContent = 'Click to Expand';
+	button.addEventListener('click', (e) => {
+		article.classList.toggle('article-open');
+	});
+	return article;
 }
+data.map((a) => {
+	return articles.appendChild(createArticle(a.title, a.date, a.firstParagraph, a.secondParagraph, a.thirdParagraph));
+});
